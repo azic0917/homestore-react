@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Box,
   Button,
@@ -45,15 +45,17 @@ export default function HomeNavbar(props: HomeNavbarProps) {
   } = props;
   const { authMember } = useGlobals();
 
-  /** HANDLERS **/
-
   return (
     <div className="home-navbar">
       <Container className="navbar-container">
         <Stack className="menu">
           <Box>
             <NavLink to="/">
-              <img className="brand-logo" src="/icons/burak.svg" />
+              <img
+                className="brand-logo"
+                src="/icons/homestore.svg"
+                alt="HomeStore Logo"
+              />
             </NavLink>
           </Box>
           <Stack className="links">
@@ -112,6 +114,7 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                     ? `${serverApi}/${authMember?.memberImage}`
                     : "/icons/default-user.svg"
                 }
+                alt="User Avatar"
                 aria-haspopup={"true"}
                 onClick={handleLogoutClick}
               />
@@ -126,8 +129,9 @@ export default function HomeNavbar(props: HomeNavbarProps) {
                 elevation: 0,
                 sx: {
                   overflow: "visible",
-                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                  filter: "drop-shadow(0px 4px 12px rgba(0,0,0,0.12))",
                   mt: 1.5,
+                  borderRadius: "8px",
                   "& .MuiAvatar-root": {
                     width: 32,
                     height: 32,
@@ -153,20 +157,24 @@ export default function HomeNavbar(props: HomeNavbarProps) {
             >
               <MenuItem onClick={handleLogoutRequest}>
                 <ListItemIcon>
-                  <Logout fontSize="small" style={{ color: "blue" }} />
+                  <Logout fontSize="small" sx={{ color: "primary.main" }} />
                 </ListItemIcon>
                 Logout
               </MenuItem>
             </Menu>
           </Stack>
         </Stack>
+
+        {/* HERO SECTION */}
         <Stack className={"header-frame"}>
           <Stack className={"detail"}>
             <Box className={"head-main-txt"}>
-              World's Most Delicious Cousine
+              Modern Home & Kitchen Essentials
             </Box>
-            <Box className={"wel-txt"}>The Choice, not just a choice</Box>
-            <Box className={"service-txt"}>24 hours service</Box>
+            <Box className={"wel-txt"}>
+              Crafted for comfort, styled for everyday living
+            </Box>
+            <Box className={"service-txt"}>Fast Delivery & Premium Quality</Box>
             <Box className={"signup"}>
               {!authMember ? (
                 <Button

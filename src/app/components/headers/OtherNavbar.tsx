@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Button,
@@ -50,12 +51,18 @@ export default function OtherNavbar(props: OtherNavbarProps) {
         <Stack className="menu">
           <Box>
             <NavLink to="/">
-              <img className="brand-logo" src="/icons/burak.svg" />
+              <img
+                className="brand-logo"
+                src="/icons/homestore.svg"
+                alt="HomeStore Logo"
+              />
             </NavLink>
           </Box>
           <Stack className="links">
             <Box className={"hover-line"}>
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="/" activeClassName={"underline"}>
+                Home
+              </NavLink>
             </Box>
             <Box className={"hover-line"}>
               <NavLink to="/products" activeClassName={"underline"}>
@@ -107,6 +114,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                     ? `${serverApi}/${authMember?.memberImage}`
                     : "/icons/default-user.svg"
                 }
+                alt="User Avatar"
                 aria-haspopup={"true"}
                 onClick={handleLogoutClick}
               />
@@ -121,8 +129,9 @@ export default function OtherNavbar(props: OtherNavbarProps) {
                 elevation: 0,
                 sx: {
                   overflow: "visible",
-                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                  filter: "drop-shadow(0px 4px 12px rgba(0,0,0,0.12))",
                   mt: 1.5,
+                  borderRadius: "8px",
                   "& .MuiAvatar-root": {
                     width: 32,
                     height: 32,
@@ -148,7 +157,7 @@ export default function OtherNavbar(props: OtherNavbarProps) {
             >
               <MenuItem onClick={handleLogoutRequest}>
                 <ListItemIcon>
-                  <Logout fontSize="small" style={{ color: "blue" }} />
+                  <Logout fontSize="small" sx={{ color: "primary.main" }} />
                 </ListItemIcon>
                 Logout
               </MenuItem>

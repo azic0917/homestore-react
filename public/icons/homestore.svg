@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" width="100%" height="100%">
+  <defs>
+    <linearGradient id="navLightGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#E2D4EE" />
+    </linearGradient>
+  </defs>
+  <!-- Mini Cart Icon -->
+  <g transform="translate(0, 2) scale(0.18)" fill="url(#navLightGrad)" stroke="url(#navLightGrad)">
+    <path d="M 110,90 C 110,82 118,80 125,80 L 140,80 C 150,80 155,87 158,95 L 180,160 C 182,166 188,170 195,170 L 255,170 C 262,170 268,166 270,160 L 285,115 C 287,108 282,100 274,100 L 165,100" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+    <line x1="172" y1="122" x2="278" y2="122" stroke-width="10" stroke-linecap="round" />
+    <line x1="180" y1="144" x2="268" y2="144" stroke-width="10" stroke-linecap="round" />
+    <circle cx="190" cy="195" r="14" />
+    <circle cx="255" cy="195" r="14" />
+  </g>
+  <!-- Brand Text -->
+  <text x="62" y="32" font-family="'Segoe UI', sans-serif" font-size="20" font-weight="900" fill="#FFFFFF" letter-spacing="1">
+    HOMESTORE
+  </text>
+</svg>

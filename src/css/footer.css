@@ -1,11 +1,11 @@
 .foot-desc-txt {
   margin-top: 22px;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 34px;
-  color: #e3c08d;
+  color: #E2D4EE; /* Soft lavender instead of old gold #e3c08d */
 }
 
 .sns-context {
@@ -17,23 +17,22 @@
 }
 
 .foot-category-title {
-  width: 106px;
-  font-family: "Poppins";
+  width: max-content; /* Changed from fixed 106px to prevent clipping */
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 34px;
-  color: #c5c8c9;
+  color: #FFFFFF; /* Crisp white header title */
 }
 
 .foot-category-link {
   margin-top: 20px;
-  height: 170px;
+  height: 170px; /* Removed duplicate entry */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 170px;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -41,9 +40,14 @@
 }
 
 .foot-category-link a {
-  color: #e3c08d;
+  color: #E2D4EE; /* Updated from #e3c08d */
   text-decoration: none;
   cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.foot-category-link a:hover {
+  color: #FFFFFF; /* Highlight on hover */
 }
 
 .find-us {
@@ -52,38 +56,39 @@
 }
 
 .find-us span {
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 34px;
-  color: #c5c8c9;
+  color: #FFFFFF; /* Updated from #c5c8c9 */
 }
 
 .find-us div {
   margin-left: 10px;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 34px;
-  color: #e3c08d;
+  color: #E2D4EE; /* Updated from #e3c08d */
 }
 
 .copyright-txt {
   margin-top: 17px;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 34px;
-  color: #e3c08d;
+  color: #B3A2C7; /* Soft muted plum tone for copyright text */
 }
 
+/* Hover line underline effect */
 .foot-category-title:after {
   display: block;
   content: "";
-  border-bottom: solid 2px #d7b686;
+  border-bottom: solid 2px #7A5299; /* Updated underline from gold #d7b686 to brand lavender */
   transform: scaleX(0);
   transition: transform 250ms ease-in-out;
   transform-origin: 0% 50%;

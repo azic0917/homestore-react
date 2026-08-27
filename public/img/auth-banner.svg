@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" width="100%" height="100%">
+  <defs>
+    <!-- Wall / Room Gradient -->
+    <linearGradient id="roomGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A2E65" />
+      <stop offset="100%" stop-color="#2D183E" />
+    </linearGradient>
+
+    <!-- Sofa Gradient -->
+    <linearGradient id="sofaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9A73B8" />
+      <stop offset="100%" stop-color="#7A5299" />
+    </linearGradient>
+
+    <!-- Warm Light Glow -->
+    <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE8B2" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#FFE8B2" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background Wall -->
+  <rect width="320" height="400" rx="12" fill="url(#roomGrad)" />
+
+  <!-- Floor Line -->
+  <rect x="0" y="320" width="320" height="80" fill="#231232" />
+
+  <!-- Soft Ambient Rug -->
+  <ellipse cx="160" cy="340" rx="120" ry="25" fill="#5C3D79" opacity="0.6" />
+
+  <!-- Standing Lamp Glow -->
+  <circle cx="250" cy="140" r="70" fill="url(#lampGlow)" />
+
+  <!-- Standing Floor Lamp -->
+  <path d="M 235,110 L 265,110 L 275,140 L 225,140 Z" fill="#FFE8B2" />
+  <line x1="250" y1="140" x2="250" y2="330" stroke="#FFD700" stroke-width="4" stroke-linecap="round" />
+  <path d="M 230,330 L 270,330" stroke="#FFD700" stroke-width="5" stroke-linecap="round" />
+
+  <!-- Wall Framed Art (Minimalist Furniture Sketch) -->
+  <rect x="50" y="50" width="70" height="90" rx="4" fill="#3B2352" stroke="#7A5299" stroke-width="2" />
+  <path d="M 65,105 C 65,85 105,85 105,105" stroke="#FFE8B2" stroke-width="3" fill="none" />
+
+  <!-- Modern Sofa / Armchair -->
+  <g fill="url(#sofaGrad)">
+    <!-- Backrest -->
+    <rect x="60" y="200" width="140" height="80" rx="16" />
+    <!-- Main Cushion -->
+    <rect x="50" y="240" width="160" height="50" rx="12" fill="#8B62A9" />
+    <!-- Armrests -->
+    <rect x="40" y="230" width="30" height="60" rx="10" fill="#6B448A" />
+    <rect x="190" y="230" width="30" height="60" rx="10" fill="#6B448A" />
+    <!-- Cushion Details / Throw Pillow -->
+    <rect x="145" y="225" width="35" height="35" rx="6" fill="#FFD700" transform="rotate(-10 145 225)" />
+    <!-- Sofa Wooden Legs -->
+    <line x1="65" y1="290" x2="55" y2="325" stroke="#D4A359" stroke-width="6" stroke-linecap="round" />
+    <line x1="195" y1="290" x2="205" y2="325" stroke="#D4A359" stroke-width="6" stroke-linecap="round" />
+  </g>
+
+  <!-- Side Coffee Table with Steaming Mug -->
+  <rect x="20" y="265" width="35" height="6" rx="2" fill="#D4A359" />
+  <line x1="37" y1="271" x2="37" y2="320" stroke="#D4A359" stroke-width="4" />
+  <path d="M 28,255 L 34,255 L 33,265 L 29,265 Z" fill="#FFFFFF" />
+</svg>

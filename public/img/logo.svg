@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 350" width="100%" height="100%">
+  <defs>
+    <!-- Bright Off-White Gradient for Truck Body -->
+    <linearGradient id="brightBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F2EBF9" />
+    </linearGradient>
+
+    <!-- Deep Accent Gradient for Text and Rims -->
+    <linearGradient id="plumAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A2E65" />
+      <stop offset="100%" stop-color="#7A5299" />
+    </linearGradient>
+
+    <!-- Gold Accent Line Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFD700" />
+      <stop offset="100%" stop-color="#FFA500" />
+    </linearGradient>
+  </defs>
+
+  <!-- Soft Glow Underneath -->
+  <ellipse cx="250" cy="285" rx="180" ry="12" fill="#000000" opacity="0.25" />
+
+  <g>
+    <!-- Main Cargo Body (Bright White) -->
+    <rect x="70" y="90" width="230" height="150" rx="12" fill="url(#brightBodyGrad)" />
+    
+    <!-- Gold Speed Accent Lines -->
+    <line x1="90" y1="120" x2="140" y2="120" stroke="url(#goldGrad)" stroke-width="6" stroke-linecap="round" />
+    <line x1="80" y1="140" x2="160" y2="140" stroke="url(#goldGrad)" stroke-width="6" stroke-linecap="round" />
+    <line x1="100" y1="160" x2="130" y2="160" stroke="url(#goldGrad)" stroke-width="6" stroke-linecap="round" />
+
+    <!-- HOMESTORE Brand Text on Truck Body (Deep Plum for Maximum Contrast) -->
+    <text x="185" y="195" font-family="'Segoe UI', sans-serif" font-size="22" font-weight="900" fill="#4A2E65" letter-spacing="2" text-anchor="middle">
+      HOMESTORE
+    </text>
+
+    <!-- Cabin (Front) -->
+    <path d="M 300,130 L 360,130 C 375,130 388,142 392,157 L 405,200 C 408,212 408,240 395,240 L 300,240 Z" fill="url(#brightBodyGrad)" />
+
+    <!-- Cabin Window (Soft Glass Lavender) -->
+    <path d="M 310,142 L 352,142 C 362,142 370,150 373,160 L 380,185 L 310,185 Z" fill="#D8C8EA" />
+
+    <!-- Bright Headlight -->
+    <rect x="400" y="205" width="10" height="20" rx="3" fill="#FFD700" />
+
+    <!-- Bumper -->
+    <rect x="395" y="230" width="20" height="12" rx="4" fill="#7A5299" />
+
+    <!-- Wheels (Darker Tires with Bright Gold/Plum Hubcaps) -->
+    <!-- Rear Wheel 1 -->
+    <circle cx="130" cy="245" r="32" fill="#1A0E28" />
+    <circle cx="130" cy="245" r="16" fill="#FFFFFF" />
+    <circle cx="130" cy="245" r="8" fill="url(#goldGrad)" />
+
+    <!-- Rear Wheel 2 -->
+    <circle cx="210" cy="245" r="32" fill="#1A0E28" />
+    <circle cx="210" cy="245" r="16" fill="#FFFFFF" />
+    <circle cx="210" cy="245" r="8" fill="url(#goldGrad)" />
+
+    <!-- Front Wheel -->
+    <circle cx="340" cy="245" r="32" fill="#1A0E28" />
+    <circle cx="340" cy="245" r="16" fill="#FFFFFF" />
+    <circle cx="340" cy="245" r="8" fill="url(#goldGrad)" />
+  </g>
+</svg>

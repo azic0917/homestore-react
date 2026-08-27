@@ -8,23 +8,22 @@ import typography from "./typography";
  */
 const light = {
   palette: {
-    type: "light",
+    mode: "light" as const,
     background: {
-      default: "#f8f8ff",
+      default: "#F8F9FA", // Soft light background
       paper: common.white,
     },
     primary: {
-      contrastText: "#d7b586",
-      main: "#343434",
+      contrastText: common.white,
+      main: "#4A2E65", // Deep Plum
     },
     secondary: {
-      contrastText: "#343434",
-      main: "#d7b586",
+      contrastText: "#1A1A1A",
+      main: "#F6F5F5", // Off-white / light gray surface
     },
     text: {
-      primary: "#343434",
-      secondary: "#d7b586",
-      dark: common.black,
+      primary: "#1A1A1A", // Dark neutral text
+      secondary: "#666666", // Muted text (removed 'dark' to prevent TS error)
     },
   },
   components: {
@@ -38,7 +37,7 @@ const light = {
     MuiCssBaseline: {
       styleOverrides: {
         html: { height: "100%" },
-        body: { background: "#f4f6f8", height: "100%", minHeight: "100%" },
+        body: { background: "#F8F9FA", height: "100%", minHeight: "100%" },
       },
     },
   },

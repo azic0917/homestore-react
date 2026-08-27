@@ -8,7 +8,9 @@
 .homepage .static-frame {
   width: 100%;
   height: 236px;
-  background: #343434;
+  /* Dark Plum background instead of legacy #343434 */
+  background: #2D183E;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .homepage .static-frame .info {
@@ -20,7 +22,7 @@
 }
 
 .homepage .static-frame .info .static-box {
-  width: 200px;
+  width: 220px; /* Increased slightly to prevent text wrapping */
   height: 116px;
   display: flex;
   flex-direction: column;
@@ -30,22 +32,25 @@
 
 .homepage .static-frame .info .static-box .static-num {
   text-align: center;
-  font-family: "Poppins";
-  font-size: 54px;
+  font-family: "Poppins", sans-serif;
+  font-size: 50px;
   font-style: normal;
-  font-weight: 600;
-  line-height: 80px;
-  color: #d7b686;
+  font-weight: 700;
+  line-height: 70px;
+  /* Soft champagne gold that blends elegantly with Deep Plum */
+  color: #E8D3A7; 
 }
 
 .homepage .static-frame .info .static-box .static-text {
   text-align: center;
-  font-family: "Poppins";
-  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
   font-style: normal;
   font-weight: 500;
-  line-height: 30px;
-  color: #d7b586;
+  line-height: 26px;
+  /* Soft lavender text color instead of #d7b586 */
+  color: #E2D4EE;
+  white-space: nowrap;
 }
 
 /** POPULAR DISHES **/
