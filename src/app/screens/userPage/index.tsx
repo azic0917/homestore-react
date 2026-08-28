@@ -21,7 +21,7 @@ export default function UserPage() {
         <Stack className={"my-page-frame"}>
           <Stack className={"my-page-left"}>
             <Box display={"flex"} flexDirection={"column"}>
-              <Box className={"menu-name"}>Modify Member Details</Box>
+              <Box className={"menu-name"}>Edit Your Profile</Box>
               <Box className={"menu-content"}>
                 <Settings />
               </Box>
@@ -47,7 +47,7 @@ export default function UserPage() {
                   <div className={"order-user-icon-box"}>
                     <img
                       src={
-                        authMember?.memberType === MemberType.RESTAURANT
+                        authMember?.memberType === MemberType.STORE
                           ? "/icons/restaurant.svg"
                           : "/icons/user-badge.svg"
                       }

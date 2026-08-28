@@ -1,9 +1,10 @@
 import { useState, SyntheticEvent, useEffect } from "react";
-import { Container, Stack, Box } from "@mui/material";
+import { Container, Stack, Box, Typography } from "@mui/material";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import CreditCardIcon from "@mui/icons-material/CreditCard";
 import PausedOrders from "./PausedOrders";
 import ProcessOrders from "./ProcessOrders";
 import FinishedOrders from "./FinishedOrders";
@@ -19,7 +20,6 @@ import "../../../css/order.css";
 import { serverApi } from "../../../lib/config";
 import { MemberType } from "../../../lib/enums/member.enum";
 
-/** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
   setPausedOrders: (data: Order[]) => dispatch(setPausedOrders(data)),
   setProcessOrders: (data: Order[]) => dispatch(setProcessOrders(data)),
@@ -57,24 +57,24 @@ export default function OrdersPage() {
       .catch((err) => console.log(err));
   }, [orderInquiry, orderBuilder]);
 
-  /** HANDLERS **/
-
   const handleChange = (e: SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
   if (!authMember) history.push("/");
+
   return (
     <div className={"order-page"}>
       <Container className="order-container">
+        {/* Left Side: Order Tabs & Order Cards */}
         <Stack className={"order-left"}>
           <TabContext value={value}>
             <Box className={"order-nav-frame"}>
-              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Box sx={{ borderBottom: 1, borderColor: "#eeeeee" }}>
                 <Tabs
                   value={value}
                   onChange={handleChange}
-                  aria-label="basic tabs example"
+                  aria-label="order status tabs"
                   className={"table_list"}
                 >
                   <Tab label="PAUSED ORDERS" value={"1"} />
@@ -91,7 +91,9 @@ export default function OrdersPage() {
           </TabContext>
         </Stack>
 
+        {/* Right Side: Member Info & Payment Card Info */}
         <Stack className={"order-right"}>
+          {/* Member Profile Box */}
           <Box className={"order-info-box"}>
             <Box className={"member-box"}>
               <div className={"order-user-img"}>
@@ -101,15 +103,20 @@ export default function OrdersPage() {
                       ? `${serverApi}/${authMember.memberImage}`
                       : "/icons/default-user.svg"
                   }
+                  alt="user avatar"
                   className={"order-user-avatar"}
+                  onError={(e: any) => {
+                    e.target.src = "/icons/default-user.svg";
+                  }}
                 />
                 <div className={"order-user-icon-box"}>
                   <img
                     src={
-                      authMember?.memberType === MemberType.RESTAURANT
-                        ? "/icons/restaurant.svg"
+                      authMember?.memberType === MemberType.STORE
+                        ? "/icons/store.svg"
                         : "/icons/user-badge.svg"
                     }
+                    alt="user type badge"
                     className={"order-user-prof-img"}
                   />
                 </div>
@@ -121,19 +128,40 @@ export default function OrdersPage() {
                 {authMember?.memberType}
               </span>
             </Box>
-            <Box className={"liner"}></Box>
+
+            <div className={"liner"}></div>
+
             <Box className={"order-user-address"}>
-              <div style={{ display: "flex" }}>
-                <LocationOnIcon />
-              </div>
-              <div className={"spec-address-txt"}>
+              <LocationOnIcon />
+              <span className={"spec-address-txt"}>
                 {authMember?.memberAddress
                   ? authMember.memberAddress
-                  : "Do not exist"}
-              </div>
+                  : "Address not set"}
+              </span>
             </Box>
           </Box>
-          <Box className={"order-info-box"} sx={{ mt: "15px" }}>
+
+          {/* Payment Card Box */}
+          <Box className={"order-info-box"}>
+            <Stack
+              direction="row"
+              alignItems="center"
+              spacing={1}
+              sx={{ width: "100%", mb: 1 }}
+            >
+              <CreditCardIcon sx={{ color: "#4A2E65", fontSize: 20 }} />
+              <Typography
+                variant="subtitle2"
+                sx={{
+                  fontWeight: 600,
+                  color: "#343434",
+                  fontFamily: "Poppins, sans-serif",
+                }}
+              >
+                Payment Details
+              </Typography>
+            </Stack>
+
             <input
               type={"text"}
               name={"cardNumber"}
@@ -145,12 +173,13 @@ export default function OrdersPage() {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
+                width: "100%",
               }}
             >
               <input
                 type={"text"}
                 name={"cardPeriod"}
-                placeholder={"07 / 24"}
+                placeholder={"MM / YY"}
                 className={"card-half-input"}
               />
               <input
@@ -163,14 +192,14 @@ export default function OrdersPage() {
             <input
               type={"text"}
               name={"cardCreator"}
-              placeholder={"Justin Robertson"}
+              placeholder={"Cardholder Name"}
               className={"card-input"}
             />
             <div className={"cards-box"}>
-              <img src={"/icons/western-card.svg"} />
-              <img src={"/icons/master-card.svg"} />
-              <img src={"/icons/paypal-card.svg"} />
-              <img src={"/icons/visa-card.svg"} />
+              <img src={"/icons/western-card.svg"} alt="Western Union" />
+              <img src={"/icons/master-card.svg"} alt="MasterCard" />
+              <img src={"/icons/paypal-card.svg"} alt="PayPal" />
+              <img src={"/icons/visa-card.svg"} alt="Visa" />
             </div>
           </Box>
         </Stack>

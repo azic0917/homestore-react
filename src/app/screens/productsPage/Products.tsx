@@ -1,5 +1,12 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { Box, Button, Container, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
@@ -40,7 +47,7 @@ export default function Products(props: ProductsProps) {
     page: 1,
     limit: 8,
     order: "createdAt",
-    productCollection: ProductCollection.DISH,
+    productCollection: ProductCollection.KITCHEN,
     search: "",
   });
   const [searchText, setSearchText] = useState<string>("");
@@ -89,30 +96,60 @@ export default function Products(props: ProductsProps) {
     history.push(`/products/${id}`);
   };
 
+  const handleCategoryToggle = (
+    event: React.MouseEvent<HTMLElement>,
+    newCollection: ProductCollection | null,
+  ) => {
+    if (newCollection !== null) {
+      searchCollection(newCollection);
+    }
+  };
+
   return (
     <div className={"products"}>
-      <Container>
+      <Container maxWidth="lg">
         <Stack flexDirection={"column"} alignItems={"center"}>
           <Stack className={"avatar-big-box"}>
             <Stack className={"top-text"}>
-              <p>Burak Restaurant</p>
+              <p>Products</p>
               <Stack className={"single-search-big-box"}>
                 <input
-                  type={"search"}
+                  type="text"
                   className={"single-search-input"}
                   name={"singleResearch"}
-                  placeholder={"Type here"}
+                  placeholder={"Type here..."}
                   value={searchText}
                   onChange={(e) => setSearchText(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter") searchProductHandler();
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      searchProductHandler();
+                    }
                   }}
                 />
                 <Button
+                  type="button"
                   className={"single-button-search"}
                   variant="contained"
                   endIcon={<SearchIcon />}
-                  onClick={searchProductHandler}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    searchProductHandler();
+                  }}
+                  sx={{
+                    backgroundColor: "#4A2E65 !important",
+                    color: "#ffffff !important",
+                    textTransform: "none",
+                    fontWeight: 600,
+                    minWidth: "auto",
+                    height: "100%",
+                    borderRadius: "0 20px 20px 0",
+                    boxShadow: "none",
+                    "&:hover": {
+                      backgroundColor: "#36224a !important",
+                      boxShadow: "none",
+                    },
+                  }}
                 >
                   Search
                 </Button>
@@ -122,113 +159,113 @@ export default function Products(props: ProductsProps) {
 
           <Stack className={"dishes-filter-section"}>
             <Stack className={"dishes-filter-box"}>
-              <Button
-                variant={"contained"}
-                className={"order"}
-                color={
-                  productSearch.order === "createdAt" ? "primary" : "secondary"
-                }
-                onClick={() => searchOrderHandler("createdAt")}
-              >
-                New
-              </Button>
-              <Button
-                variant={"contained"}
-                className={"order"}
-                color={
-                  productSearch.order === "productPrice"
-                    ? "primary"
-                    : "secondary"
-                }
-                onClick={() => searchOrderHandler("productPrice")}
-              >
-                Price
-              </Button>
-              <Button
-                variant={"contained"}
-                className={"order"}
-                color={
-                  productSearch.order === "productViews"
-                    ? "primary"
-                    : "secondary"
-                }
-                onClick={() => searchOrderHandler("productViews")}
-              >
-                Views
-              </Button>
+              {["createdAt", "productPrice", "productViews"].map(
+                (orderType) => (
+                  <Button
+                    key={orderType}
+                    variant={
+                      productSearch.order === orderType
+                        ? "contained"
+                        : "outlined"
+                    }
+                    className={"order"}
+                    onClick={() => searchOrderHandler(orderType)}
+                    sx={{
+                      backgroundColor:
+                        productSearch.order === orderType
+                          ? "#4A2E65"
+                          : "transparent",
+                      color:
+                        productSearch.order === orderType
+                          ? "#ffffff"
+                          : "#4A2E65",
+                      borderColor: "#4A2E65",
+                      fontWeight: 600,
+                      borderRadius: "20px",
+                      padding: "6px 20px",
+                      textTransform: "capitalize",
+                      "&:hover": {
+                        backgroundColor:
+                          productSearch.order === orderType
+                            ? "#36224a"
+                            : "rgba(74, 46, 101, 0.08)",
+                        borderColor: "#4A2E65",
+                      },
+                    }}
+                  >
+                    {orderType === "createdAt"
+                      ? "New"
+                      : orderType === "productPrice"
+                        ? "Price"
+                        : "Views"}
+                  </Button>
+                ),
+              )}
             </Stack>
           </Stack>
 
           <Stack className={"list-category-section"}>
             <Stack className={"product-category"}>
-              <div className={"category-main"}>
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection === ProductCollection.OTHER
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() => searchCollection(ProductCollection.OTHER)}
-                >
+              <ToggleButtonGroup
+                value={productSearch.productCollection}
+                exclusive
+                onChange={handleCategoryToggle}
+                aria-label="product categories"
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  gap: "8px",
+                  padding: "8px",
+                  backgroundColor: "#ffffff",
+                  borderRadius: "24px",
+                  boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.04)",
+                  border: "1px solid #e8e8e8",
+                  "& .MuiToggleButton-root": {
+                    border: "none",
+                    borderRadius: "16px !important",
+                    padding: "8px 22px",
+                    fontFamily: "Poppins, sans-serif",
+                    fontWeight: 500,
+                    color: "#555555",
+                    textTransform: "capitalize",
+                    transition: "all 0.2s ease",
+                    "&:hover": {
+                      backgroundColor: "rgba(74, 46, 101, 0.1)",
+                    },
+                    "&.Mui-selected": {
+                      backgroundColor: "#4A2E65 !important",
+                      color: "#ffffff !important",
+                      boxShadow: "0 2px 8px rgba(74, 46, 101, 0.25)",
+                    },
+                  },
+                }}
+              >
+                <ToggleButton value={ProductCollection.KITCHEN}>
+                  Kitchen
+                </ToggleButton>
+                <ToggleButton value={ProductCollection.CLEANING}>
+                  Cleaning
+                </ToggleButton>
+                <ToggleButton value={ProductCollection.BATHROOM}>
+                  Bathroom
+                </ToggleButton>
+                <ToggleButton value={ProductCollection.LIGHTING}>
+                  Lighting
+                </ToggleButton>
+                <ToggleButton value={ProductCollection.STORAGE}>
+                  Storage
+                </ToggleButton>
+                <ToggleButton value={ProductCollection.OTHER}>
                   Other
-                </Button>
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection ===
-                    ProductCollection.DESSERT
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() => searchCollection(ProductCollection.DESSERT)}
-                >
-                  Dessert
-                </Button>
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection === ProductCollection.DRINK
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() => searchCollection(ProductCollection.DRINK)}
-                >
-                  Drink
-                </Button>
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection === ProductCollection.SALAD
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() => searchCollection(ProductCollection.SALAD)}
-                >
-                  Salad
-                </Button>
-                <Button
-                  variant={"contained"}
-                  color={
-                    productSearch.productCollection === ProductCollection.DISH
-                      ? "primary"
-                      : "secondary"
-                  }
-                  onClick={() => searchCollection(ProductCollection.DISH)}
-                >
-                  Dish
-                </Button>
-              </div>
+                </ToggleButton>
+              </ToggleButtonGroup>
             </Stack>
 
             <Stack className={"product-wrapper"}>
               {products.length !== 0 ? (
                 products.map((product: Product) => {
                   const imagePath = `${serverApi}/${product.productImages[0]}`;
-                  const sizeVolume =
-                    product.productCollection === ProductCollection.DRINK
-                      ? product.productVolume + " litre"
-                      : product.productSize + " size";
                   return (
                     <Stack
                       key={product._id}
@@ -239,7 +276,6 @@ export default function Products(props: ProductsProps) {
                         className={"product-img"}
                         sx={{ backgroundImage: `url(${imagePath})` }}
                       >
-                        <div className={"product-sale"}>{sizeVolume}</div>
                         <Button
                           className={"shop-btn"}
                           onClick={(e) => {
@@ -255,18 +291,20 @@ export default function Products(props: ProductsProps) {
                         >
                           <img
                             src={"/icons/shopping-cart.svg"}
-                            style={{ display: "flex" }}
+                            alt="Shopping Cart"
+                            style={{ display: "flex", width: "20px" }}
                           />
                         </Button>
-                        <Button className={"view-btn"} sx={{ right: "36px" }}>
+                        <Button className={"view-btn"}>
                           <Badge
                             badgeContent={product.productViews}
-                            color="secondary"
+                            color="error"
                           >
                             <RemoveRedEyeIcon
                               sx={{
                                 color:
-                                  product.productViews === 0 ? "gray" : "white",
+                                  product.productViews === 0 ? "#888" : "#fff",
+                                fontSize: "20px",
                               }}
                             />
                           </Badge>
@@ -276,9 +314,8 @@ export default function Products(props: ProductsProps) {
                         <span className={"product-title"}>
                           {product.productName}
                         </span>
-                        <div className={"product-desc"}>
-                          <MonetizationOnIcon />
-                          {product.productPrice}
+                        <div className={"product-price"}>
+                          ₩{product.productPrice}
                         </div>
                       </Box>
                     </Stack>
@@ -305,49 +342,31 @@ export default function Products(props: ProductsProps) {
                     next: ArrowForwardIcon,
                   }}
                   {...item}
-                  color={"secondary"}
                 />
               )}
               onChange={paginationHandler}
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  color: "#4A2E65",
+                  fontFamily: "Poppins, sans-serif",
+                  fontWeight: 500,
+                  "&:hover": {
+                    backgroundColor: "rgba(74, 46, 101, 0.08)",
+                  },
+                  "&.Mui-selected": {
+                    backgroundColor: "#4A2E65",
+                    color: "#ffffff",
+                    fontWeight: 600,
+                    "&:hover": {
+                      backgroundColor: "#36224a",
+                    },
+                  },
+                },
+              }}
             />
           </Stack>
         </Stack>
       </Container>
-
-      <div className={"brands-logo"}>
-        <Container className={"family-brands"}>
-          <Box className={"category-title"}>Our Family Brands</Box>
-          <Stack className={"brand-list"}>
-            <Box className={"review-box"}>
-              <img src={"/img/gurme.webp"} />
-            </Box>
-            <Box className={"review-box"}>
-              <img src={"/img/sweets.webp"} />
-            </Box>
-            <Box className={"review-box"}>
-              <img src={"/img/seafood.webp"} />
-            </Box>
-            <Box className={"review-box"}>
-              <img src={"/img/doner.webp"} />
-            </Box>
-          </Stack>
-        </Container>
-      </div>
-
-      <div className={"address"}>
-        <Container>
-          <Stack className={"address-area"}>
-            <Box className={"title"}>Our address</Box>
-            <iframe
-              style={{ marginTop: "60px" }}
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.363734762081!2d69.2267250514616!3d41.322703307863044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b9a0a33281d%3A0x9c5015eab678e435!2z0KDQsNC50YXQvtC9!5e0!3m2!1sko!2skr!4v1655461169573!5m2!1sko!2skr"
-              width="1320"
-              height="500"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </Stack>
-        </Container>
-      </div>
     </div>
   );
 }

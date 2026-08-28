@@ -53,137 +53,215 @@
   white-space: nowrap;
 }
 
-/** POPULAR DISHES **/
+/** POPULAR PRODUCTS **/
 
-.homepage .popular-dishes-frame {
+/* Updated Frame Class */
+.homepage .popular-products-frame {
   width: 100%;
-  height: 580px;
+  height: auto; /* Changed from fixed 580px to auto-expand */
+  padding-bottom: 60px;
   display: flex;
-  background: #f8f8ff;
+  background: #F8F6FC; /* Extremely light lavender neutral background */
 }
 
-.homepage .popular-dishes-frame .popular-section {
+.homepage .popular-products-frame .popular-section {
   margin-top: 45px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.homepage .popular-dishes-frame .popular-section .category-title {
+.homepage .popular-products-frame .popular-section .category-title {
   text-align: center;
-  font-family: "Roboto Serif";
-  font-size: 36px;
+  /* Updated Font & Color to match Hero Serif style */
+  font-family: "Roboto Serif", serif;
+  font-size: 40px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  letter-spacing: 1.44px;
-  color: #000;
+  letter-spacing: -0.5px;
+  color: #4A2E65; /* Deep Plum */
 }
 
-.homepage .popular-dishes-frame .popular-section .cards-frame {
-  width: 100%;
-  margin-top: 43px;
+/* NEW CARD STYLING */
+.homepage .popular-products-frame .card {
+  position: relative;
+  height: 480px !important; /* Taller card height */
+  border-radius: 16px;
+  border: 1px solid rgba(122, 82, 153, 0.1);
+  box-shadow: 0 4px 20px rgba(74, 46, 101, 0.04);
+  transition: all 0.3s ease;
+  overflow: hidden;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: flex-end; /* Pushes content overlay to bottom */
 }
 
-.homepage .popular-dishes-frame .popular-section .cards-frame .card {
-  min-height: 430px;
-  min-width: 300px;
+.homepage .popular-products-frame .card:hover {
   cursor: pointer;
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(74, 46, 101, 0.12);
+  border-color: rgba(122, 82, 153, 0.25);
 }
 
-.homepage .popular-dishes-frame .popular-section .cards-frame .card .card-cover {
-  background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.4),
-      rgba(0, 0, 0, 0) 200px
-    ),
-    linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 300px);
+.homepage .popular-products-frame .card .card-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  z-index: 1;
 }
 
-.homepage .popular-dishes-frame .no-data {
+.homepage .popular-products-frame .card:hover .card-media {
+  transform: scale(1.04);
+}
+
+.homepage .popular-products-frame .card .card-body {
+  position: relative;
+  z-index: 2;
+  margin: 12px;
+  padding: 16px !important;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(122, 82, 153, 0.15);
+  border-radius: 12px;
+  box-shadow: 0px 8px 24px rgba(74, 46, 101, 0.08);
+}
+
+.homepage .popular-products-frame .card .product-name {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #4A2E65; /* Deep Plum */
+  margin: 0;
+  /* Basic Truncation for long names */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.homepage .popular-products-frame .card .product-views {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7A5299; /* Muted Lavender for views/metadata */
+}
+
+.homepage .popular-products-frame .card .product-desc-container {
+  color: #B3A2C7; /* Muted lavender icon color */
+  border-top: 1px solid rgba(122, 82, 153, 0.1);
+  padding-top: 12px;
+}
+
+.homepage .popular-products-frame .card .product-desc {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #6C5F7B; /* Softer text color for description */
+  /* Multi-line Truncation (2 lines) */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Updated No Data Style */
+.homepage .popular-products-frame .no-data {
   width: 100%;
   height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-transform: capitalize;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 30px;
+  font-size: 28px;
   line-height: 34px;
-  color: #e3c08d;
+  /* Updated color from legacy gold #e3c08d to muted purple */
+  color: #B3A2C7; 
 }
 
 /** NEW PRODUCTS **/
 
 .homepage .new-products-frame {
   width: 100%;
-  height: 605px;
-  background: #f8f8ff;
+  height: auto;
+  padding-bottom: 60px;
+  background: #F8F6FC; /* Soft lavender neutral background */
   display: flex;
 }
 
-.homepage .main {
+.homepage .new-products-frame .main {
   margin-top: 45px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Category Header Title */
 .homepage .new-products-frame .category-title {
-  font-family: "Dancing Script";
+  font-family: "Roboto Serif", serif;
   font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 43px;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48px;
+  color: #4A2E65; /* Deep Plum */
+  letter-spacing: -0.5px;
 }
 
-.homepage .new-products-frame .main .cards-frame {
-  width: 100%;
-  margin: 47px 2px 2px 2px;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.homepage .new-products-frame .main .card {
-  height: 335px;
-  width: 290px;
+/* Card Outer Frame */
+.homepage .new-products-frame .card {
+  height: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(122, 82, 153, 0.12);
+  background: #FFFFFF;
+  box-shadow: 0 4px 20px rgba(74, 46, 101, 0.04);
+  transition: all 0.3s ease;
+  overflow: hidden;
   cursor: pointer;
 }
 
-.homepage .new-products-frame .product-sale {
-  position: absolute;
-  margin-top: 10px;
-  z-index: 100;
-  width: 90px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ff9200;
-  box-shadow: 4px 6px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 25px;
-  font-family: "Poppins";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12px;
-  line-height: 21px;
-  color: #f8f8ff;
+.homepage .new-products-frame .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(74, 46, 101, 0.12);
+  border-color: rgba(122, 82, 153, 0.25);
 }
 
+.homepage .new-products-frame .card .card-media {
+  background-color: #E2D4EE;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.homepage .new-products-frame .card:hover .card-media {
+  transform: scale(1.04);
+}
+
+/* "NEW" Badge Style */
+.homepage .new-products-frame .product-sale {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  height: 26px;
+  background: #E8D3A7 !important; /* Champagne Gold accent */
+  border-radius: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #4A2E65 !important; /* Deep Plum text */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Detail Area Styling */
 .homepage .new-products-frame .product-detail {
-  width: auto;
-  height: 49%;
-  display: flex;
-  justify-content: center;
-  margin-top: -12px;
-  border-top: 1px solid;
-  border-color: #f8f8ff;
-  background-color: #fafbfb;
+  padding: 18px 16px !important;
+  background-color: #FFFFFF;
 }
 
 .homepage .new-products-frame .product-detail .info {
@@ -195,136 +273,153 @@
 }
 
 .homepage .new-products-frame .product-detail .title {
-  width: 65px;
-  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #4A2E65;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px; /* Gives name room to expand cleanly */
 }
 
 .homepage .new-products-frame .product-detail .price {
-  margin-left: 10px;
-  width: 20px;
-  font-weight: 500;
-}
-
-.homepage .new-products-frame .product-detail .divider {
-  margin: 0 10px 0 10px;
-  width: 2px;
-  background-color: #d9d9d9;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #7A5299; /* Muted Purple price emphasis */
+  white-space: nowrap;
 }
 
 .homepage .new-products-frame .product-detail .views {
   display: flex;
   align-items: center;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
+  font-size: 13px;
+  color: #B3A2C7;
 }
 
+/* No Data Placeholder */
 .homepage .new-products-frame .no-data {
   width: 100%;
-  height: 300px;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-transform: capitalize;
-  font-family: "Poppins";
-  font-style: normal;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 30px;
-  line-height: 34px;
-  color: #e3c08d;
-}
-
-/** ADVERTISEMENT **/
-
-.homepage .ads-restaurant-frame {
-  width: 100%;
-  height: 693px;
-  display: flex;
-  overflow: hidden;
-  transform: perspective(0px);
-  box-shadow: -3px 0px 20px 14px #34343480;
-}
-
-.homepage .ads-restaurant-frame .ads-video {
-  width: 100%;
-  background: #0c0e12;
-  display: flex;
-  box-shadow: 0px -8px 90px rgb(215 215 255);
-  transform: scale(1.5);
-  overflow: hidden;
+  font-size: 26px;
+  color: #B3A2C7;
 }
 
 /** ACTIVE USERS **/
 
 .homepage .active-users-frame {
   width: 100%;
-  height: 550px;
-  background: #f8f8ff;
+  height: auto;
+  padding-bottom: 60px;
+  background: #F8F6FC; /* Soft lavender-tinted background */
   display: flex;
 }
 
 .homepage .active-users-frame .main {
-  padding-top: 60px;
+  padding-top: 45px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .homepage .active-users-frame .category-title {
-  font-family: "Dancing Script";
+  font-family: "Roboto Serif", serif;
   font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 43px;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: normal;
+  letter-spacing: -0.5px;
+  color: #4A2E65; /* Deep Plum */
 }
 
-.homepage .cards-frame {
-  width: 100%;
-  margin-top: 20px;
-  flex-direction: row;
-}
-
-.homepage .cards-frame .card {
-  margin: 5px;
-  min-height: 305px;
-  min-width: 305px;
+/* CARD STYLING */
+.homepage .active-users-frame .card {
+  height: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(122, 82, 153, 0.1);
+  box-shadow: 0 4px 16px rgba(74, 46, 101, 0.04);
+  background: #FFFFFF;
+  transition: all 0.3s ease;
   cursor: pointer;
+  overflow: hidden;
 }
 
-.homepage .cards-frame .member-nickname {
-  font-size: medium;
+.homepage .active-users-frame .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(74, 46, 101, 0.12);
+  border-color: rgba(122, 82, 153, 0.25);
+}
+
+.homepage .active-users-frame .card .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px !important;
+}
+
+/* AVATAR STYLING */
+.homepage .active-users-frame .avatar-wrapper {
+  padding: 4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E2D4EE 0%, #7A5299 100%);
+  margin-bottom: 16px;
+}
+
+.homepage .active-users-frame .member-avatar {
+  width: 100px !important;
+  height: 100px !important;
+  border: 3px solid #FFFFFF;
+  background-color: #E2D4EE;
+}
+
+/* TEXT STYLING */
+.homepage .active-users-frame .member-nickname {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #4A2E65;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.homepage .active-users-frame .member-type {
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #7A5299;
   text-align: center;
 }
 
-.homepage .cards-frame .no-data {
+/* NO DATA PLACEHOLDER */
+.homepage .active-users-frame .no-data {
   width: 100%;
-  height: 300px;
+  height: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-transform: capitalize;
-  font-family: "Poppins";
-  font-style: normal;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 30px;
-  line-height: 34px;
-  color: #e3c08d;
+  font-size: 28px;
+  color: #B3A2C7;
 }
 
 /** EVENTS **/
 
 .homepage .events-frame {
   width: 100%;
-  height: 745px;
-  background: #f8f8ff;
+  height: auto;
+  padding: 60px 0;
+  background: #FFFFFF; /* Clean neutral background */
   display: flex;
-}
-
-.homepage .events-frame .category-title {
-  font-family: "Dancing Script";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 43px;
-  padding-top: 20px;
 }
 
 .homepage .events-frame .events-main {
@@ -337,72 +432,75 @@
 }
 
 .homepage .events-frame .events-main .events-text {
-  width: auto;
-  height: 70px;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.homepage .events-frame .events-main .prev-next-frame {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 250px;
-  margin: 40px 0 40px 0;
-  height: 25px;
+.homepage .events-frame .category-title {
+  font-family: "Roboto Serif", serif !important;
+  font-style: normal;
+  font-weight: 600 !important;
+  font-size: 40px !important;
+  line-height: normal;
+  letter-spacing: -0.5px;
+  color: #4A2E65 !important; /* Deep Plum */
 }
 
-.homepage .events-frame .dot-frame-pagination {
-  position: relative;
-  width: auto;
-  display: flex;
-}
-
-.homepage .events-frame .events-main .events-info {
+/* SWIPER CONTAINER & SLIDES */
+.homepage .events-frame .events-info {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  padding-bottom: 20px;
 }
 
 .homepage .events-frame .events-info .events-info-frame {
   position: relative;
-  width: 500px;
-  height: 100%;
+  width: 380px !important; /* Slightly expanded slide width */
+  height: 520px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.homepage .events-frame .events-img-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #E2D4EE;
 }
 
 .homepage .events-frame .events-img {
   width: 100%;
   height: 100%;
-  display: flex;
-  border-radius: 10px;
-  background-size: cover;
+  object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
+.homepage .events-frame .events-info-frame:hover .events-img {
+  transform: scale(1.04);
+}
+
+/* FLOATING CARD DESCRIPTION OVERLAY */
 .homepage .events-frame .events-desc {
   position: absolute;
-  margin-bottom: 7px;
-  padding: 10px;
-  display: flex;
-  width: 90%;
-  height: auto;
-  bottom: 5px;
-  background: #f8f8ff;
-  box-shadow: 0px 40px 30px rgba(25, 25, 46, 0.04);
-  border-radius: 8px;
+  bottom: 16px;
+  width: 88%; /* Slightly tighter margins inside narrow card */
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0px 12px 32px rgba(74, 46, 101, 0.12);
+  border: 1px solid rgba(122, 82, 153, 0.15);
+  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
 .homepage .events-frame .events-desc .events-bott {
-  width: 97%;
-  height: auto;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -411,88 +509,150 @@
 
 .homepage .events-frame .events-desc .events-bott .bott-left {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .homepage .events-frame .bott-left .event-title-speaker {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column; /* Stacks title and speaker vertically to prevent overlap in narrow layout */
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.homepage .events-frame .event-title-speaker .event-title {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  color: #4A2E65 !important; /* Deep Plum */
 }
 
 .homepage .events-frame .event-title-speaker .event-organizator {
   display: flex;
   align-items: center;
+  gap: 6px;
 }
 
 .homepage .events-frame .event-title-speaker .event-organizator img {
-  width: 20px;
-  margin-right: 10px;
+  width: 16px;
+  height: 16px;
+  filter: invert(24%) sepia(35%) saturate(1480%) hue-rotate(232deg) brightness(92%) contrast(90%); /* Brand Plum Tint */
 }
 
 .homepage .events-frame .event-organizator .spec-text-author {
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  line-height: 34px;
-  color: #140342;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #7A5299; /* Muted Lavender */
+  margin: 0;
 }
 
 .homepage .events-frame .bott-left .text-desc {
-  margin-top: 10px;
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
+  margin: 6px 0 12px 0;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 17px;
-  line-height: 26px;
-  color: #4f547b;
+  font-size: 14px;
+  line-height: 20px;
+  color: #6C5F7B;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .homepage .events-frame .bott-left .bott-info {
-  margin-top: 10px;
   display: flex;
   justify-content: flex-end;
-  flex-direction: row;
+  align-items: center;
+  gap: 16px;
   width: 100%;
-  height: 16px;
+  border-top: 1px solid rgba(122, 82, 153, 0.1);
+  padding-top: 10px;
 }
 
 .homepage .events-frame .bott-info .bott-info-main {
-  margin-left: 10px;
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  width: auto;
-  height: 100%;
-  font-family: "GT Walsheim Pro";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  color: #4f547b;
+  align-items: center;
+  gap: 6px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: #7A5299;
 }
 
 .homepage .events-frame .bott-info .bott-info-main img {
-  margin-right: 10px;
+  width: 14px;
+  height: 14px;
+  filter: invert(34%) sepia(31%) saturate(1060%) hue-rotate(232deg) brightness(90%) contrast(88%);
 }
 
-.homepage .events-frame .swiper-wrapper {
+/* NAVIGATION & PAGINATION CONTROLS */
+.homepage .events-frame .prev-next-frame {
+  position: relative;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+  height: 40px;
+}
+
+.homepage .events-frame .custom-arrow {
+  position: static !important;
+  margin: 0 !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50%;
+  background: #F8F6FC;
+  border: 1px solid rgba(122, 82, 153, 0.2);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.homepage .events-frame .custom-arrow::after {
+  display: none !important; /* Hide default Swiper arrow font */
+}
+
+.homepage .events-frame .custom-arrow:hover {
+  background: #4A2E65;
+}
+
+.homepage .events-frame .custom-arrow:hover img {
+  filter: brightness(0) invert(1);
+}
+
+/* 1. PREVIOUS BUTTON (LEFT) - Flips image 180 degrees so it points LEFT */
+.homepage .events-frame .swiper-button-prev img {
+  transform: rotate(0deg);
+}
+
+/* 2. NEXT BUTTON (RIGHT) - Keeps image normal so it points RIGHT */
+.homepage .events-frame .swiper-button-next img {
+  transform: rotate(180deg);
+}
+
+.homepage .events-frame .dot-frame-pagination {
+  position: static !important;
+  width: auto !important;
+  display: flex;
+  gap: 8px;
 }
 
 .homepage .events-frame .swiper-pagination-bullet {
-  margin-right: 5px;
-  width: 8px;
-  height: 8px;
-  text-align: center;
-  opacity: 1;
-  background: #f8f8ff;
+  width: 10px;
+  height: 10px;
+  margin: 0 !important;
+  opacity: 0.4;
+  background: #7A5299 !important;
   border-radius: 50%;
+  transition: all 0.3s ease;
 }
 
 .homepage .events-frame .swiper-pagination-bullet-active {
-  background: #343434;
-  border-radius: 50%;
+  opacity: 1;
+  width: 24px;
+  border-radius: 12px;
+  background: #4A2E65 !important;
 }

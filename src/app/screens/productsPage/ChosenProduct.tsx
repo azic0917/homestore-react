@@ -12,9 +12,9 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setChosenProduct, setRestaurant } from "./slice";
+import { setChosenProduct, setStore } from "./slice";
 import { createSelector } from "reselect";
-import { retrieveChosenProduct, retrieveRestaurant } from "./selector";
+import { retrieveChosenProduct, retrieveStore } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { useParams } from "react-router-dom";
 import ProductService from "../../services/ProductService";
@@ -25,7 +25,7 @@ import { CartItem } from "../../../lib/types/search";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
-  setRestaurant: (data: Member) => dispatch(setRestaurant(data)),
+  setStore: (data: Member) => dispatch(setStore(data)),
   setChosenProduct: (data: Product) => dispatch(setChosenProduct(data)),
 });
 const chosenProductRetriever = createSelector(
@@ -34,12 +34,9 @@ const chosenProductRetriever = createSelector(
     chosenProduct,
   }),
 );
-const restaurantRetriever = createSelector(
-  retrieveRestaurant,
-  (restaurant) => ({
-    restaurant,
-  }),
-);
+const storeRetriever = createSelector(retrieveStore, (store) => ({
+  store,
+}));
 
 interface ChosenProductProps {
   onAdd: (item: CartItem) => void;
@@ -48,9 +45,9 @@ interface ChosenProductProps {
 export default function ChosenProduct(props: ChosenProductProps) {
   const { onAdd } = props;
   const { productId } = useParams<{ productId: string }>();
-  const { setRestaurant, setChosenProduct } = actionDispatch(useDispatch());
+  const { setStore, setChosenProduct } = actionDispatch(useDispatch());
   const { chosenProduct } = useSelector(chosenProductRetriever);
-  const { restaurant } = useSelector(restaurantRetriever);
+  const { store } = useSelector(storeRetriever);
 
   useEffect(() => {
     const product = new ProductService();
@@ -61,8 +58,8 @@ export default function ChosenProduct(props: ChosenProductProps) {
 
     const member = new MemberService();
     member
-      .getRestaurant()
-      .then((data) => setRestaurant(data))
+      .getStore()
+      .then((data) => setStore(data))
       .catch((err) => console.log(err));
   }, []);
 
@@ -83,7 +80,11 @@ export default function ChosenProduct(props: ChosenProductProps) {
               const imagePath = `${serverApi}/${ele}`;
               return (
                 <SwiperSlide key={index}>
-                  <img className="slider-image" src={imagePath} />
+                  <img
+                    className="slider-image"
+                    src={imagePath}
+                    alt={chosenProduct?.productName}
+                  />
                 </SwiperSlide>
               );
             })}
@@ -94,13 +95,25 @@ export default function ChosenProduct(props: ChosenProductProps) {
             <strong className={"product-name"}>
               {chosenProduct?.productName}
             </strong>
-            <span className={"resto-name"}>{restaurant?.memberNick}</span>
-            <span className={"resto-name"}>{restaurant?.memberPhone}</span>
+            <span className={"resto-name"}>{store?.memberNick}</span>
+            <span className={"resto-phone"}>{store?.memberPhone}</span>
             <Box className={"rating-box"}>
-              <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
+              <Rating
+                name="half-rating"
+                defaultValue={2.5}
+                precision={0.5}
+                sx={{
+                  color: "#4A2E65",
+                  "& .MuiRating-iconEmpty": {
+                    color: "#d0c4de",
+                  },
+                }}
+              />
               <div className={"evaluation-box"}>
                 <div className={"product-view"}>
-                  <RemoveRedEyeIcon sx={{ mr: "10px" }} />
+                  <RemoveRedEyeIcon
+                    sx={{ mr: "6px", color: "#4A2E65", fontSize: "20px" }}
+                  />
                   <span>{chosenProduct?.productViews}</span>
                 </div>
               </div>
@@ -110,10 +123,12 @@ export default function ChosenProduct(props: ChosenProductProps) {
                 ? chosenProduct?.productDesc
                 : "No Description"}
             </p>
-            <Divider height="1" width="100%" bg="#000000" />
+            <Divider height="1" width="100%" bg="#e0d6eb" />
             <div className={"product-price"}>
-              <span>Price:</span>
-              <span>${chosenProduct?.productPrice}</span>
+              <span className={"price-label"}>Price:</span>
+              <span className={"price-value"}>
+                ₩{chosenProduct?.productPrice}
+              </span>
             </div>
             <div className={"button-box"}>
               <Button
@@ -128,8 +143,22 @@ export default function ChosenProduct(props: ChosenProductProps) {
                   });
                   e.stopPropagation();
                 }}
+                sx={{
+                  backgroundColor: "#4A2E65",
+                  color: "#ffffff",
+                  textTransform: "none",
+                  fontWeight: 600,
+                  fontSize: "15px",
+                  borderRadius: "24px",
+                  padding: "10px 36px",
+                  boxShadow: "0 4px 12px rgba(74, 46, 101, 0.25)",
+                  "&:hover": {
+                    backgroundColor: "#36224a",
+                    boxShadow: "0 6px 16px rgba(74, 46, 101, 0.35)",
+                  },
+                }}
               >
-                Add To Basket
+                Add To Cart
               </Button>
             </div>
           </Box>

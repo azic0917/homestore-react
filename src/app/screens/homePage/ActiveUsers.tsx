@@ -1,8 +1,15 @@
-import { Box, Container, Stack } from "@mui/material";
-import Card from "@mui/joy/Card";
-import { CssVarsProvider, Typography } from "@mui/joy";
-import CardOverflow from "@mui/joy/CardOverflow";
-import AspectRatio from "@mui/joy/AspectRatio";
+import React from "react";
+import {
+  Box,
+  Container,
+  Stack,
+  Card,
+  CardContent,
+  Avatar,
+  Grid,
+} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveTopUsers } from "./selector";
@@ -19,38 +26,50 @@ export default function ActiveUsers() {
 
   return (
     <div className={"active-users-frame"}>
-      <Container>
+      <Container sx={{ py: 6 }}>
         <Stack className={"main"}>
-          <Box className={"category-title"}>Active Users</Box>
-          <Stack className={"cards-frame"}>
-            <CssVarsProvider>
-              {topUsers.length !== 0 ? (
-                topUsers.map((member: Member) => {
-                  const imagePath = `${serverApi}/${member.memberImage}`;
-                  return (
-                    <Card
-                      key={member._id}
-                      variant="outlined"
-                      className={"card"}
-                    >
-                      <CardOverflow>
-                        <AspectRatio ratio="1">
-                          <img src={imagePath} alt="" />
-                        </AspectRatio>
-                      </CardOverflow>
-                      <CardOverflow>
+          <Box className={"category-title"}>Top Community Members</Box>
+
+          {topUsers.length !== 0 ? (
+            <Grid container spacing={3} sx={{ mt: 3, width: "100%" }}>
+              {topUsers.slice(0, 4).map((member: Member) => {
+                const imagePath = member.memberImage
+                  ? `${serverApi}/${member.memberImage}`
+                  : "/icons/default-user.svg";
+
+                return (
+                  <Grid item key={member._id} xs={12} sm={6} md={3}>
+                    <Card className={"card"}>
+                      <CardContent className="card-body">
+                        {/* Avatar Container with Subtle Glow */}
+                        <Box className="avatar-wrapper">
+                          <Avatar
+                            src={imagePath}
+                            alt={member.memberNick}
+                            className="member-avatar"
+                          >
+                            <PersonOutlineIcon
+                              sx={{ fontSize: 40, color: "#7A5299" }}
+                            />
+                          </Avatar>
+                        </Box>
+
+                        {/* Member Details */}
                         <Typography className={"member-nickname"}>
                           {member.memberNick}
                         </Typography>
-                      </CardOverflow>
+                        <Typography className={"member-type"}>
+                          Community Member
+                        </Typography>
+                      </CardContent>
                     </Card>
-                  );
-                })
-              ) : (
-                <Box className="no-data">No Active Users!</Box>
-              )}
-            </CssVarsProvider>
-          </Stack>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          ) : (
+            <Box className="no-data">No Active Users Yet!</Box>
+          )}
         </Stack>
       </Container>
     </div>

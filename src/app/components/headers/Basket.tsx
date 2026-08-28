@@ -29,7 +29,7 @@ export default function Basket(props: BasketProps) {
     (a: number, c: CartItem) => a + c.quantity * c.price,
     0,
   );
-  const shippingCost: number = itemsPrice < 100 ? 5 : 0;
+  const shippingCost: number = itemsPrice < 100000 && itemsPrice > 0 ? 5000 : 0;
   const totalPrice = (itemsPrice + shippingCost).toFixed(1);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -72,8 +72,17 @@ export default function Basket(props: BasketProps) {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <Badge badgeContent={cartItems.length} color="secondary">
-          <img src={"/icons/shopping-cart.svg"} />
+        <Badge
+          badgeContent={cartItems.length}
+          sx={{
+            "& .MuiBadge-badge": {
+              backgroundColor: "#4A2E65",
+              color: "#ffffff",
+              fontWeight: 600,
+            },
+          }}
+        >
+          <img src={"/icons/shopping-cart.svg"} alt="shopping cart" />
         </Badge>
       </IconButton>
       <Menu
@@ -81,30 +90,19 @@ export default function Basket(props: BasketProps) {
         id="account-menu"
         open={open}
         onClose={handleClose}
-        // onClick={handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
             overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            filter: "drop-shadow(0px 6px 20px rgba(0,0,0,0.15))",
             mt: 1.5,
+            borderRadius: "16px",
+            border: "1px solid #e8e8e8",
             "& .MuiAvatar-root": {
               width: 32,
               height: 32,
               ml: -0.5,
               mr: 1,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 14,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
             },
           },
         }}
@@ -114,13 +112,23 @@ export default function Basket(props: BasketProps) {
         <Stack className={"basket-frame"}>
           <Box className={"all-check-box"}>
             {cartItems.length === 0 ? (
-              <div>Cart is empty!</div>
+              <div className={"empty-title"}>Cart is empty!</div>
             ) : (
-              <Stack flexDirection={"row"}>
-                <div>Cart Products:</div>
+              <Stack
+                flexDirection={"row"}
+                justifyContent={"space-between"}
+                width={"100%"}
+                alignItems={"center"}
+              >
+                <div className={"cart-title"}>
+                  Cart Products ({cartItems.length})
+                </div>
                 <DeleteForeverIcon
-                  sx={{ ml: "5px", cursor: "pointer" }}
-                  color={"primary"}
+                  sx={{
+                    cursor: "pointer",
+                    color: "#ffffff",
+                    "&:hover": { opacity: 0.8 },
+                  }}
                   onClick={() => onDeleteAll()}
                 />
               </Stack>
@@ -129,54 +137,81 @@ export default function Basket(props: BasketProps) {
 
           <Box className={"orders-main-wrapper"}>
             <Box className={"orders-wrapper"}>
-              {cartItems.map((item: CartItem) => {
-                const imagePath = `${serverApi}/${item.image}`;
-                return (
-                  <Box className={"basket-info-box"} key={item._id}>
-                    <div className={"cancel-btn"}>
-                      <CancelIcon
-                        color={"primary"}
-                        onClick={() => onDelete(item)}
+              {cartItems.length === 0 ? (
+                <Box className={"empty-cart-body"}>
+                  No items in your basket yet.
+                </Box>
+              ) : (
+                cartItems.map((item: CartItem) => {
+                  const imagePath = `${serverApi}/${item.image}`;
+                  return (
+                    <Box className={"basket-info-box"} key={item._id}>
+                      <img
+                        src={imagePath}
+                        className={"product-img"}
+                        alt={item.name}
                       />
-                    </div>
-                    <img src={imagePath} className={"product-img"} />
-                    <span className={"product-name"}>{item.name}</span>
-                    <p className={"product-price"}>
-                      ${item.price} x {item.quantity}
-                    </p>
-                    <Box sx={{ minWidth: 120 }}>
+                      <Box className={"product-details"}>
+                        <span className={"product-name"}>{item.name}</span>
+                        <p className={"product-price"}>
+                          ₩{item.price} × {item.quantity}
+                        </p>
+                      </Box>
                       <div className="col-2">
                         <button
                           onClick={() => onRemove(item)}
                           className="remove"
                         >
                           -
-                        </button>{" "}
+                        </button>
+                        <span className={"qty-value"}>{item.quantity}</span>
                         <button onClick={() => onAdd(item)} className="add">
                           +
                         </button>
                       </div>
+                      <div className={"cancel-btn"}>
+                        <CancelIcon
+                          sx={{
+                            color: "#999999",
+                            fontSize: "20px",
+                            "&:hover": { color: "#e53935" },
+                          }}
+                          onClick={() => onDelete(item)}
+                        />
+                      </div>
                     </Box>
-                  </Box>
-                );
-              })}
+                  );
+                })
+              )}
             </Box>
           </Box>
-          {cartItems.length !== 0 ? (
+          {cartItems.length !== 0 && (
             <Box className={"basket-order"}>
-              <span className={"price"}>
-                Total: ${totalPrice} ({itemsPrice} + {shippingCost})
-              </span>
+              <Box className={"price-summary"}>
+                <span className={"price-total"}>Total: ₩{totalPrice}</span>
+                <span className={"price-breakdown"}>
+                  (₩{itemsPrice} + ₩{shippingCost} shipping)
+                </span>
+              </Box>
               <Button
                 onClick={proceedOrderHandler}
                 startIcon={<ShoppingCartIcon />}
                 variant={"contained"}
+                sx={{
+                  backgroundColor: "#4A2E65",
+                  color: "#ffffff",
+                  textTransform: "none",
+                  fontWeight: 600,
+                  borderRadius: "20px",
+                  padding: "6px 20px",
+                  "&:hover": {
+                    backgroundColor: "#36224a",
+                  },
+                }}
               >
                 Order
               </Button>
             </Box>
-          ) : (
-            ""
           )}
         </Stack>
       </Menu>

@@ -73,12 +73,12 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
                       <img src={imagePath} className={"order-dish-img"} />
                       <p className={"title-dish"}>{product.productName}</p>
                       <Box className={"price-box"}>
-                        <p>${item.itemPrice}</p>
+                        <p>₩{item.itemPrice}</p>
                         <img src={"/icons/close.svg"} />
                         <p>{item.itemQuantity}</p>
                         <img src={"/icons/pause.svg"} />
                         <p style={{ marginLeft: "15px" }}>
-                          ${item.itemQuantity * item.itemPrice}
+                          ₩{item.itemQuantity * item.itemPrice}
                         </p>
                       </Box>
                     </Box>
@@ -89,16 +89,16 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
               <Box className={"total-price-box"}>
                 <Box className={"box-total"}>
                   <p>Product price</p>
-                  <p>${order.orderTotal - order.orderDelivery}</p>
+                  <p>₩{order.orderTotal - order.orderDelivery}</p>
                   <img src={"/icons/plus.svg"} style={{ marginLeft: "20px" }} />
                   <p>delivery cost</p>
-                  <p>${order.orderDelivery}</p>
+                  <p>₩{order.orderDelivery}</p>
                   <img
                     src={"/icons/pause.svg"}
                     style={{ marginLeft: "20px" }}
                   />
                   <p>Total</p>
-                  <p>${order.orderTotal}</p>
+                  <p>₩{order.orderTotal}</p>
                 </Box>
                 <p className={"data-compl"}>
                   {moment().format("YY-MM-DD HH:mm")}
