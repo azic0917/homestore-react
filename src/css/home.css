@@ -59,7 +59,7 @@
 .homepage .popular-products-frame {
   width: 100%;
   height: auto; /* Changed from fixed 580px to auto-expand */
-  padding-bottom: 60px;
+  padding-bottom: 40px;
   display: flex;
   background: #F8F6FC; /* Extremely light lavender neutral background */
 }
@@ -74,7 +74,7 @@
 .homepage .popular-products-frame .popular-section .category-title {
   text-align: center;
   /* Updated Font & Color to match Hero Serif style */
-  font-family: "Roboto Serif", serif;
+  font-family: "Poppins", sans-serif;
   font-size: 40px;
   font-style: normal;
   font-weight: 600;
@@ -190,7 +190,7 @@
 .homepage .new-products-frame {
   width: 100%;
   height: auto;
-  padding-bottom: 60px;
+  padding-bottom: 40px;
   background: #F8F6FC; /* Soft lavender neutral background */
   display: flex;
 }
@@ -204,48 +204,59 @@
 
 /* Category Header Title */
 .homepage .new-products-frame .category-title {
-  font-family: "Roboto Serif", serif;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 40px;
-  line-height: 48px;
+  line-height: normal;
   color: #4A2E65; /* Deep Plum */
   letter-spacing: -0.5px;
 }
 
-/* Card Outer Frame */
+/* CARD STYLING (Matching Popular Products Card Style) */
 .homepage .new-products-frame .card {
-  height: 100%;
+  position: relative;
+  height: 480px !important; /* Taller card height matching popular products */
   border-radius: 16px;
-  border: 1px solid rgba(122, 82, 153, 0.12);
+  border: 1px solid rgba(122, 82, 153, 0.1);
   background: #FFFFFF;
   box-shadow: 0 4px 20px rgba(74, 46, 101, 0.04);
   transition: all 0.3s ease;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Pushes content overlay to bottom */
   cursor: pointer;
 }
 
 .homepage .new-products-frame .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(74, 46, 101, 0.12);
+  box-shadow: 0 12px 30px rgba(74, 46, 101, 0.12);
   border-color: rgba(122, 82, 153, 0.25);
 }
 
+/* Background Image Cover */
 .homepage .new-products-frame .card .card-media {
-  background-color: #E2D4EE;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100% !important;
   object-fit: cover;
   transition: transform 0.5s ease;
+  z-index: 1;
 }
 
 .homepage .new-products-frame .card:hover .card-media {
   transform: scale(1.04);
 }
 
-/* "NEW" Badge Style */
+/* Floating "NEW" Badge */
 .homepage .new-products-frame .product-sale {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 14px;
+  left: 14px;
   z-index: 10;
   height: 26px;
   background: #E8D3A7 !important; /* Champagne Gold accent */
@@ -254,62 +265,89 @@
   font-weight: 700;
   font-size: 11px;
   letter-spacing: 1px;
-  color: #4A2E65 !important; /* Deep Plum text */
+  color: #4A2E65 !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
-/* Detail Area Styling */
-.homepage .new-products-frame .product-detail {
-  padding: 18px 16px !important;
-  background-color: #FFFFFF;
+/* Glassmorphic Overlay Card Body */
+.homepage .new-products-frame .card .card-body {
+  position: relative;
+  z-index: 2;
+  margin: 12px;
+  padding: 16px !important;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(122, 82, 153, 0.15);
+  border-radius: 12px;
+  box-shadow: 0px 8px 24px rgba(74, 46, 101, 0.08);
 }
 
-.homepage .new-products-frame .product-detail .info {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.homepage .new-products-frame .product-detail .title {
+/* Product Title - Allows 2 lines so longer titles fit cleanly */
+.homepage .new-products-frame .card .product-name {
   font-family: "Poppins", sans-serif;
-  font-weight: 600;
   font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
   color: #4A2E65;
+  margin: 0;
+  flex: 1;
+  padding-right: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Product Price */
+.homepage .new-products-frame .card .product-price {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #7A5299; /* Muted Lavender emphasis */
+  white-space: nowrap;
+}
+
+/* Info Divider & Containers */
+.homepage .new-products-frame .card .product-info-container {
+  border-top: 1px solid rgba(122, 82, 153, 0.1);
+  padding-top: 10px;
+  margin-top: 8px;
+}
+
+.homepage .new-products-frame .card .product-desc-container {
+  color: #B3A2C7;
+  overflow: hidden;
+  max-width: 70%;
+}
+
+.homepage .new-products-frame .card .product-desc {
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #6C5F7B;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 130px; /* Gives name room to expand cleanly */
 }
 
-.homepage .new-products-frame .product-detail .price {
+.homepage .new-products-frame .card .product-views {
   font-family: "Poppins", sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  color: #7A5299; /* Muted Purple price emphasis */
-  white-space: nowrap;
-}
-
-.homepage .new-products-frame .product-detail .views {
-  display: flex;
-  align-items: center;
-  font-family: "Poppins", sans-serif;
-  font-weight: 500;
   font-size: 13px;
-  color: #B3A2C7;
+  font-weight: 500;
+  color: #7A5299;
+  white-space: nowrap;
 }
 
 /* No Data Placeholder */
 .homepage .new-products-frame .no-data {
   width: 100%;
-  height: 250px;
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 26px;
+  font-size: 28px;
   color: #B3A2C7;
 }
 
@@ -318,7 +356,7 @@
 .homepage .active-users-frame {
   width: 100%;
   height: auto;
-  padding-bottom: 60px;
+  padding-bottom: 40px;
   background: #F8F6FC; /* Soft lavender-tinted background */
   display: flex;
 }
@@ -332,7 +370,7 @@
 }
 
 .homepage .active-users-frame .category-title {
-  font-family: "Roboto Serif", serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 40px;
@@ -418,7 +456,7 @@
   width: 100%;
   height: auto;
   padding: 60px 0;
-  background: #FFFFFF; /* Clean neutral background */
+  background: #F8F6FC; /* Clean neutral background */
   display: flex;
 }
 
@@ -440,7 +478,7 @@
 }
 
 .homepage .events-frame .category-title {
-  font-family: "Roboto Serif", serif !important;
+  font-family: "Poppins", sans-serif !important;
   font-style: normal;
   font-weight: 600 !important;
   font-size: 40px !important;

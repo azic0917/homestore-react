@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import Divider from "../../components/divider";
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { retrieveNewProducts } from "./selector";
@@ -41,43 +41,68 @@ export default function NewProducts() {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
                   <Grid item key={product._id} xs={12} sm={6} md={3}>
-                    <Card variant="outlined" className={"card"}>
-                      {/* Product Image + Sale Badge Wrapper */}
-                      <Box sx={{ position: "relative" }}>
-                        <Chip label="NEW" className="product-sale" />
-                        <CardMedia
-                          component="img"
-                          height="220"
-                          image={imagePath}
-                          alt={product.productName}
-                          className="card-media"
-                        />
-                      </Box>
+                    <Card className={"card"}>
+                      {/* 1. Floating Badge */}
+                      <Chip label="NEW" className="product-sale" />
 
-                      {/* Details Section */}
-                      <CardContent className="product-detail">
-                        <Stack className="info">
+                      {/* 2. Full Background Image */}
+                      <CardMedia
+                        component="img"
+                        image={imagePath}
+                        alt={product.productName}
+                        className="card-media"
+                      />
+
+                      {/* 3. Glassmorphic Body Overlay */}
+                      <CardContent className="card-body">
+                        {/* Title & Price / Views */}
+                        <Stack
+                          flexDirection={"row"}
+                          justifyContent={"space-between"}
+                          alignItems="flex-start"
+                          sx={{ mb: 1 }}
+                        >
+                          <Typography variant="h6" className="product-name">
+                            {product.productName}
+                          </Typography>
+                          <Typography className="product-price">
+                            ₩{product.productPrice}
+                          </Typography>
+                        </Stack>
+
+                        {/* Description & Views Metadata */}
+                        <Stack
+                          direction="row"
+                          alignItems="center"
+                          justifyContent="space-between"
+                          className="product-info-container"
+                        >
                           <Stack
                             direction="row"
-                            alignItems="center"
-                            spacing={1}
-                            sx={{ minWidth: 0 }}
+                            gap={0.8}
+                            className="product-desc-container"
                           >
-                            <Typography className={"title"}>
-                              {product.productName}
-                            </Typography>
-                            <Divider width="2" height="18" bg="#E2D4EE" />
-                            <Typography className={"price"}>
-                              ₩{product.productPrice}
+                            <DescriptionOutlinedIcon
+                              sx={{ fontSize: 18, mt: "2px" }}
+                            />
+                            <Typography
+                              variant="body2"
+                              className="product-desc"
+                            >
+                              {product.productDesc
+                                ? product.productDesc
+                                : "No description available"}
                             </Typography>
                           </Stack>
 
-                          <Typography className={"views"}>
+                          <Stack
+                            direction="row"
+                            alignItems="center"
+                            className="product-views"
+                          >
+                            <VisibilityIcon sx={{ fontSize: 16, mr: "3px" }} />
                             {product.productViews}
-                            <VisibilityIcon
-                              sx={{ fontSize: 18, marginLeft: "4px" }}
-                            />
-                          </Typography>
+                          </Stack>
                         </Stack>
                       </CardContent>
                     </Card>

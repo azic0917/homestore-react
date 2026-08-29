@@ -23,7 +23,7 @@ export default function Statistics() {
           </Stack>
           <Divider height="64" width="2" bg="#7A5299" />
           <Stack className="static-box">
-            <Box className="static-num">99%</Box>
+            <Box className="static-num">97%</Box>
             <Box className="static-text">Satisfied Clients</Box>
           </Stack>
         </Stack>

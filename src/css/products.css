@@ -1,7 +1,7 @@
 .products-page {
   position: relative;
   width: 100%;
-  margin-top: 170px;
+  margin-top: 20px;
   min-height: 100vh;
   background: #f8f8ff;
 }
@@ -162,7 +162,12 @@
 .products-page .products .product-card {
   width: calc(25% - 18px);
   min-width: 250px;
-  height: auto;
+  /* Option A: Let card height adjust automatically to image height */
+  height: auto; 
+  
+  /* Option B: Give the overall card a fixed height if you want all cards uniform */
+  /* min-height: 420px; */
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -183,9 +188,16 @@
 .products-page .products .product-card .product-img {
   position: relative;
   width: 100%;
-  height: 240px;
-  background-size: cover;
+  
+  /* 1. INCREASE HEIGHT HERE (e.g., from 240px to 320px) */
+  height: 320px; 
+
+  /* 2. ADJUST FITTING METHOD */
+  /* Keep 'cover' to fill space, or use 'contain' with 'no-repeat' to show 100% of the image */
+  background-size: cover; /* or contain */
+  background-repeat: no-repeat;
   background-position: center;
+  background-color: #f9f9f9; /* Soft background fill if using 'contain' */
   border-radius: 12px;
   overflow: hidden;
 }
@@ -350,7 +362,7 @@
 
 .products-page .chosen-product .chosen-product-slider {
   width: 48%;
-  height: 480px;
+  height: 580px;
   background: #ffffff;
   border-radius: 20px;
   overflow: hidden;
@@ -384,7 +396,7 @@
 .products-page .chosen-product .chosen-product-info {
   padding: 36px 40px;
   width: 48%;
-  min-height: 480px;
+  min-height: 580px;
   height: auto;
   display: flex;
   background: #ffffff;

@@ -90,6 +90,9 @@ export default function Basket(props: BasketProps) {
         id="account-menu"
         open={open}
         onClose={handleClose}
+        MenuListProps={{
+          disablePadding: true, // 👈 Disables MUI's default top and bottom list padding
+        }}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -98,11 +101,9 @@ export default function Basket(props: BasketProps) {
             mt: 1.5,
             borderRadius: "16px",
             border: "1px solid #e8e8e8",
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
+            "& .MuiList-root": {
+              paddingTop: 0, // 👈 Ensures no top padding above header
+              paddingBottom: 0,
             },
           },
         }}

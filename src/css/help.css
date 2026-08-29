@@ -1,183 +1,306 @@
+/* ==========================================================================
+   HELP PAGE BASE & CONTAINER LAYOUT
+   ========================================================================== */
+
 .help-page {
   width: 100%;
-  margin-top: 160px;
-  height: auto;
-  display: flex;
+  min-height: calc(100vh - 160px);
+  margin-top: 20px;
   background: #f8f8ff;
+  display: flex;
+  padding-bottom: 60px;
+  box-sizing: border-box;
 }
 
 .help-page .help-container {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 50px;
-  flex-direction: row;
+  display: flex;
+  flex-direction: column;
 }
+
+/* ==========================================================================
+   TABS HEADER (MATCHING ORDERS PAGE STYLE)
+   ========================================================================== */
 
 .help-page .help-menu {
   width: 100%;
-  height: 60px;
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  border-bottom: 1px solid #f8f8ff;
+  margin-bottom: 30px;
 }
 
-.help-page .help-menu .table-list {
+/* MUI Border Box Wrapper */
+.help-page .help-menu .MuiBox-root {
+  border-bottom: none !important;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.help-page .css-1gsv261 {
-  width: 75%;
+/* Tabs Container */
+.help-page .table_list {
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 30px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eaeaea;
+  display: inline-flex;
 }
 
-.help-page .css-heg063-MuiTabs-flexContainer {
-  justify-content: space-between;
+/* Hide default MUI Tab indicator line */
+.help-page .table_list .MuiTabs-indicator {
+  display: none;
 }
 
-.help-page .css-19kzrtu {
-  padding-top: 24px;
+/* Tab Button Styling */
+.help-page .table_list .MuiTab-root {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: #666666;
+  padding: 10px 28px;
+  min-height: 44px;
+  border-radius: 24px;
+  text-transform: uppercase;
+  transition: all 0.25s ease-in-out;
 }
+
+.help-page .table_list .MuiTab-root:hover {
+  color: #4A2E65;
+  background-color: rgba(74, 46, 101, 0.05);
+}
+
+/* Active Tab Styling */
+.help-page .table_list .MuiTab-root.Mui-selected {
+  background-color: #4A2E65;
+  color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(74, 46, 101, 0.25);
+}
+
+/* ==========================================================================
+   MAIN CONTENT CONTAINER & TAB PANELS
+   ========================================================================== */
 
 .help-page .help-main-content {
   width: 100%;
-  height: 1000px;
+  height: auto;
+  min-height: 500px;
 }
 
+/* Remove default TabPanel padding */
+.help-page .MuiTabPanel-root {
+  padding: 0;
+}
+
+/* ==========================================================================
+   TAB 1: TERMS & RULES
+   ========================================================================== */
+
 .help-page .rules-box {
-  padding: 24px;
+  padding: 32px;
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #f8f8ff;
-  border: 1px solid #ededed;
-  box-shadow: 0px 20px 30px rgba(25, 25, 46, 0.04);
-  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 16px;
+  box-sizing: border-box;
 }
 
-.rules-box .rules-frame {
+.help-page .rules-box .rules-frame {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
-.rules-box .rules-frame p {
-  border-bottom: 1px solid #dddddd;
-  color: #000000;
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+.help-page .rules-box .rules-frame p {
+  margin: 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #444444;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 1rem;
-  letter-spacing: 0.00938em;
+  font-size: 14px;
+  line-height: 24px;
 }
+
+.help-page .rules-box .rules-frame p:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* ==========================================================================
+   TAB 2: FAQ ACCORDION
+   ========================================================================== */
 
 .help-page .accordion-menu {
   width: 100%;
-  height: auto;
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
+
+.help-page .accordion-menu .MuiAccordion-root {
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px !important;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.help-page .accordion-menu .MuiAccordion-root:before {
+  display: none; /* Hide standard MUI divider line */
+}
+
+.help-page .accordion-menu .MuiAccordion-root.Mui-expanded {
+  border-color: #4A2E65;
+  box-shadow: 0px 4px 16px rgba(74, 46, 101, 0.08);
+  margin: 0;
+}
+
+.help-page .accordion-menu .MuiAccordionSummary-root {
+  padding: 8px 20px;
+}
+
+.help-page .accordion-menu .MuiAccordionSummary-content .MuiTypography-root {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: #343434;
+}
+
+.help-page .accordion-menu .MuiAccordionSummary-expandIconWrapper {
+  color: #4A2E65;
+}
+
+.help-page .accordion-menu .MuiAccordionDetails-root {
+  padding: 0 20px 20px 20px;
+  border-top: 1px solid #f8f8ff;
+}
+
+.help-page .accordion-menu .MuiAccordionDetails-root .MuiTypography-root {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #666666;
+}
+
+/* ==========================================================================
+   TAB 3: CONTACT FORM (ADMIN LETTER)
+   ========================================================================== */
 
 .help-page .admin-letter-box {
-  padding: 60px;
+  padding: 40px;
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #f8f8ff;
-  border: 1px solid #ededed;
-  box-shadow: 0px 20px 30px rgba(25, 25, 46, 0.04);
-  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 16px;
+  box-sizing: border-box;
 }
 
-.help-page .admin-letter-box .admin-letter-container {
+.help-page .admin-letter-container {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.help-page .admin-letter-container .admin-letter-frame {
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
 }
 
 .help-page .admin-letter-frame span {
-  font-family: "ABeeZee";
-  font-style: normal;
-  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
   font-size: 24px;
-  line-height: 28px;
-  color: #140342;
+  line-height: 32px;
+  color: #343434;
 }
 
 .help-page .admin-letter-frame p {
-  margin-top: 20px;
-  font-family: "Sedan";
-  font-style: normal;
+  margin-top: 6px;
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 15px;
-  line-height: 26px;
-  color: #4f547b;
+  font-size: 14px;
+  line-height: 22px;
+  color: #777777;
 }
 
-.help-page .admin-letter-container .admin-letter-frame {
-  display: flex;
-  flex-direction: column;
-}
-
+/* Input Fields */
 .help-page .admin-letter-frame .admin-input-box {
-  margin-top: 30px;
+  margin-top: 20px;
   width: 100%;
-  height: auto;
   display: flex;
   flex-direction: column;
 }
 
 .help-page .admin-letter-frame .admin-input-box label {
-  font-family: "Verdana";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
-  color: #140342;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #444444;
+  margin-bottom: 8px;
 }
 
 .help-page .admin-letter-frame .admin-input-box input {
-  margin-top: 10px;
-  padding: 20px;
   width: 100%;
-  height: 60px;
-  display: flex;
+  height: 48px;
+  padding: 0 16px;
   background: #f8f8ff;
-  border: 1px solid #dddddd;
-  border-radius: 8px;
-  font-family: "Verdana";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 26px;
-  color: #4f547b;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #343434;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .help-page .admin-letter-frame .admin-input-box textarea {
-  margin-top: 10px;
-  padding: 20px;
   width: 100%;
-  height: 150px;
-  display: flex;
+  height: 130px;
+  padding: 14px 16px;
   background: #f8f8ff;
-  border: 1px solid #dddddd;
-  border-radius: 8px;
-  font-family: "Verdana";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 26px;
-  color: #4f547b;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #343434;
+  outline: none;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.help-page .admin-letter-frame .admin-input-box input:focus,
+.help-page .admin-letter-frame .admin-input-box textarea:focus {
+  border-color: #4A2E65;
+  box-shadow: 0 0 0 3px rgba(74, 46, 101, 0.1);
+  background: #ffffff;
+}
+
+/* Submit Button */
+.help-page .admin-letter-frame .MuiButton-contained {
+  background-color: #4A2E65;
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 10px 36px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: capitalize;
+  box-shadow: 0 4px 12px rgba(74, 46, 101, 0.2);
+  transition: all 0.2s ease;
+}
+
+.help-page .admin-letter-frame .MuiButton-contained:hover {
+  background-color: #36224a;
+  box-shadow: 0 6px 16px rgba(74, 46, 101, 0.3);
 }

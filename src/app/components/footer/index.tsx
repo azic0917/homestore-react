@@ -114,7 +114,7 @@ export default function Footer() {
                   >
                     L.
                   </Typography>
-                  <span>123 Main Street, Suite 400</span>
+                  <span>123 Gangnam-ro, Gangnam-gu, Seoul</span>
                 </Box>
                 <Box sx={{ display: "flex", gap: 1 }}>
                   <Typography

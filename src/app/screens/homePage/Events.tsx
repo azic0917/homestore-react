@@ -18,9 +18,7 @@ export default function Events() {
       <Container maxWidth="lg">
         <Stack className={"events-main"}>
           <Box className={"events-text"}>
-            <Typography className={"category-title"}>
-              Events & Workshops
-            </Typography>
+            <Typography className={"category-title"}>Weekly Events</Typography>
           </Box>
 
           <Swiper

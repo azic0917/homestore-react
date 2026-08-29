@@ -4,8 +4,8 @@
 
 .order-page {
   width: 100%;
-  margin-top: 170px;
   min-height: 100vh;
+  margin-top: 20px;
   background: #f8f8ff;
   display: flex;
 }

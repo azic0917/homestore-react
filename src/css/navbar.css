@@ -93,7 +93,7 @@
 .home-navbar .navbar-container .header-frame .detail .head-main-txt {
   width: 480px;
   height: auto; /* Changed from 150px to prevent overlap */
-  font-family: "Roboto Serif", serif;
+  font-family: "Poppins", sans-serif;
   font-size: 48px;
   font-style: normal;
   font-weight: 500;
@@ -106,7 +106,7 @@
   margin-top: 16px; /* Smooth spacing under title */
   width: 510px;
   height: auto; /* Changed from fixed 42px */
-  font-family: "Roboto Serif", serif;
+  font-family: "Poppins", sans-serif;
   font-size: 28px;
   font-style: normal;
   font-weight: 400;
@@ -119,7 +119,7 @@
   margin-top: 16px;
   width: 250px;
   height: auto;
-  font-family: "Roboto Serif", serif;
+  font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -161,7 +161,7 @@
 }
 
 .other-navbar {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
