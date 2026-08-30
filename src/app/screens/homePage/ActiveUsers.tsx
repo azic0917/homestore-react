@@ -28,7 +28,7 @@ export default function ActiveUsers() {
     <div className={"active-users-frame"}>
       <Container sx={{ py: 6 }}>
         <Stack className={"main"}>
-          <Box className={"category-title"}>Top Community Members</Box>
+          <Box className={"category-title"}>Top Customers</Box>
 
           {topUsers.length !== 0 ? (
             <Grid container spacing={3} sx={{ mt: 3, width: "100%" }}>
@@ -59,7 +59,7 @@ export default function ActiveUsers() {
                           {member.memberNick}
                         </Typography>
                         <Typography className={"member-type"}>
-                          Community Member
+                          Customer
                         </Typography>
                       </CardContent>
                     </Card>

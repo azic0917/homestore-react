@@ -385,9 +385,9 @@
 }
 
 .order-page .order-user-icon-box .order-user-prof-img {
-  width: 16px;
-  height: 16px;
-  filter: brightness(0) invert(1);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .order-page .order-info-box .order-user-name {

@@ -106,7 +106,7 @@ function App() {
         handleSignupClose={handleSignupClose}
         handleLoginClose={handleLoginClose}
       />
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-center" reverseOrder={false} />
       <ScrollToTop />
     </>
   );

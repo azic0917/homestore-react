@@ -140,7 +140,7 @@ export default function Basket(props: BasketProps) {
             <Box className={"orders-wrapper"}>
               {cartItems.length === 0 ? (
                 <Box className={"empty-cart-body"}>
-                  No items in your basket yet.
+                  No items in your cart yet.
                 </Box>
               ) : (
                 cartItems.map((item: CartItem) => {
