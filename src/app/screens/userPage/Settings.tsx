@@ -6,9 +6,9 @@ import { useState } from "react";
 import { MemberUpdateInput } from "../../../lib/types/member";
 import { T } from "../../../lib/types/common";
 import {
-  sweetErrorHandling,
-  sweetTopSmallSuccessAlert,
-} from "../../../lib/sweetAlert";
+  toastErrorHandling,
+  toastTopSmallSuccessAlert,
+} from "../../../lib/toastAlerts";
 import { Messages, serverApi } from "../../../lib/config";
 import MemberService from "../../services/MemberService";
 
@@ -67,10 +67,10 @@ export function Settings() {
       const result = await member.updateMember(memberUpdateInput);
       setAuthMember(result);
 
-      await sweetTopSmallSuccessAlert("Modified successfully!", 700);
+      await toastTopSmallSuccessAlert("Modified successfully!", 700);
     } catch (err) {
       console.log(err);
-      sweetErrorHandling(err).then();
+      toastErrorHandling(err);
     }
   };
 
@@ -81,7 +81,7 @@ export function Settings() {
       validateImageTypes = ["image/jpg", "image/jpeg", "image/png"];
 
     if (!validateImageTypes.includes(fileType)) {
-      sweetErrorHandling(Messages.error5).then();
+      toastErrorHandling(Messages.error5);
     } else {
       if (file) {
         memberUpdateInput.memberImage = file;

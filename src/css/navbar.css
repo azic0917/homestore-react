@@ -41,7 +41,9 @@
 .home-navbar .navbar-container .menu .user-avatar {
   width: 50px;
   height: 50px;
-  border-radius: 24px;
+  border-radius: 50%;     /* Guarantees a perfect circle */
+  object-fit: cover;      /* Crops image without squishing aspect ratio */
+  object-position: center;
 }
 
 .home-navbar a {
@@ -205,7 +207,9 @@
 .other-navbar .navbar-container .menu .user-avatar {
   width: 50px;
   height: 50px;
-  border-radius: 24px;
+  border-radius: 50%;     /* Guarantees a perfect circle */
+  object-fit: cover;      /* Crops image without squishing aspect ratio */
+  object-position: center;
 }
 
 .other-navbar a {

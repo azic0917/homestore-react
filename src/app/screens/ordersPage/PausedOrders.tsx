@@ -8,7 +8,7 @@ import { retrievePausedOrders } from "./selector";
 import { Messages, serverApi } from "../../../lib/config";
 import { Order, OrderItem, OrderUpdateInput } from "../../../lib/types/orders";
 import { Product } from "../../../lib/types/product";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { toastErrorHandling } from "../../../lib/toastAlerts";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import { useGlobals } from "../../hooks/useGlobals";
 import OrderService from "../../services/OrderService";
@@ -48,7 +48,7 @@ export default function PausedOrders(props: PausedOrdersProps) {
       }
     } catch (err) {
       console.log(err);
-      sweetErrorHandling(err).then();
+      toastErrorHandling(err);
     }
   };
 
@@ -74,7 +74,7 @@ export default function PausedOrders(props: PausedOrdersProps) {
       }
     } catch (err) {
       console.log(err);
-      sweetErrorHandling(err).then();
+      toastErrorHandling(err);
     }
   };
 

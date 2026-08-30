@@ -14,7 +14,7 @@ import { T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
 import { LoginInput, MemberInput } from "../../../lib/types/member";
 import MemberService from "../../services/MemberService";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { toastErrorHandling } from "../../../lib/toastAlerts";
 import { useGlobals } from "../../hooks/useGlobals";
 
 /* 1. Scaled up image dimensions to match larger modal */
@@ -72,7 +72,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
     } catch (err) {
       console.log(err);
       handleSignupClose();
-      sweetErrorHandling(err).then();
+      toastErrorHandling(err);
     }
   };
 
@@ -94,7 +94,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
     } catch (err) {
       console.log(err);
       handleLoginClose();
-      sweetErrorHandling(err).then();
+      toastErrorHandling(err);
     }
   };
 

@@ -18,6 +18,10 @@ import { retrieveNewProducts } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
 
+interface NewProductsProps {
+  chooseProductHandler: (id: string) => void;
+}
+
 /** REDUX SLICE & SELECTOR **/
 const newProductsRetriever = createSelector(
   retrieveNewProducts,
@@ -26,8 +30,9 @@ const newProductsRetriever = createSelector(
   }),
 );
 
-export default function NewProducts() {
+export default function NewProducts(props: NewProductsProps) {
   const { newProducts } = useSelector(newProductsRetriever);
+  const { chooseProductHandler } = props;
 
   return (
     <div className={"new-products-frame"}>
@@ -41,7 +46,10 @@ export default function NewProducts() {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
                   <Grid item key={product._id} xs={12} sm={6} md={3}>
-                    <Card className={"card"}>
+                    <Card
+                      className={"card"}
+                      onClick={() => chooseProductHandler(product._id)}
+                    >
                       {/* 1. Floating Badge */}
                       <Chip label="NEW" className="product-sale" />
 

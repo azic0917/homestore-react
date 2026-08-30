@@ -10,13 +10,15 @@ import OtherNavbar from "./components/headers/OtherNavbar";
 import Footer from "./components/footer";
 import useBasket from "./hooks/useBasket";
 import AuthenticationModal from "./components/auth";
-import { sweetErrorHandling, sweetTopSuccessAlert } from "../lib/sweetAlert";
+import { toastErrorHandling, toastSuccessAlert } from "../lib/toastAlerts";
 import { Messages } from "../lib/config";
 import MemberService from "./services/MemberService";
 import { useGlobals } from "./hooks/useGlobals";
+import { Toaster } from "react-hot-toast";
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/footer.css";
+import ScrollToTop from "../lib/scrollToTop";
 
 function App() {
   const location = useLocation();
@@ -40,11 +42,11 @@ function App() {
       const member = new MemberService();
       await member.logout();
 
-      await sweetTopSuccessAlert("success", 700);
+      await toastSuccessAlert("success", 700);
       setAuthMember(null);
     } catch (err) {
       console.log(err);
-      sweetErrorHandling(Messages.error1);
+      toastErrorHandling(Messages.error1);
     }
   };
 
@@ -104,6 +106,8 @@ function App() {
         handleSignupClose={handleSignupClose}
         handleLoginClose={handleLoginClose}
       />
+      <Toaster position="top-right" reverseOrder={false} />
+      <ScrollToTop />
     </>
   );
 }

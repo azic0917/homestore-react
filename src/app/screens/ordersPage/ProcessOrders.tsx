@@ -12,7 +12,7 @@ import { Product } from "../../../lib/types/product";
 import { useGlobals } from "../../hooks/useGlobals";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import OrderService from "../../services/OrderService";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { toastErrorHandling } from "../../../lib/toastAlerts";
 import { T } from "../../../lib/types/common";
 
 /** REDUX SLICE & SELECTOR **/
@@ -52,7 +52,7 @@ export default function ProcessOrders(props: ProcessOrdersProps) {
       }
     } catch (err) {
       console.log(err);
-      sweetErrorHandling(err).then();
+      toastErrorHandling(err);
     }
   };
 

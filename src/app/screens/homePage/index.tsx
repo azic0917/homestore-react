@@ -10,9 +10,10 @@ import { setNewProducts, setPopularProducts, setTopUsers } from "./slice";
 import { Product } from "../../../lib/types/product";
 import ProductService from "../../services/ProductService";
 import { ProductCollection } from "../../../lib/enums/product.enum";
-import "../../../css/home.css";
 import MemberService from "../../services/MemberService";
 import { Member } from "../../../lib/types/member";
+import { useHistory } from "react-router-dom";
+import "../../../css/home.css";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -25,6 +26,12 @@ export default function HomePage() {
   const { setPopularProducts, setNewProducts, setTopUsers } =
     actionDispatch(useDispatch());
 
+  //  Define handler
+  const history = useHistory();
+  const chooseProductHandler = (id: string) => {
+    history.push(`/products/${id}`);
+  };
+
   useEffect(() => {
     const product = new ProductService();
     product
@@ -32,8 +39,8 @@ export default function HomePage() {
         page: 1,
         limit: 4,
         order: "productViews",
-        productCollection:
-          ProductCollection.KITCHEN || ProductCollection.CLEANING,
+        // productCollection:
+        //   ProductCollection.KITCHEN || ProductCollection.CLEANING,
       })
       .then((data) => setPopularProducts(data))
       .catch((err) => console.log(err));
@@ -57,8 +64,8 @@ export default function HomePage() {
   return (
     <div className={"homepage"}>
       <Statistics />
-      <PopularProducts />
-      <NewProducts />
+      <PopularProducts chooseProductHandler={chooseProductHandler} />
+      <NewProducts chooseProductHandler={chooseProductHandler} />
       <ActiveUsers />
       <Events />
     </div>

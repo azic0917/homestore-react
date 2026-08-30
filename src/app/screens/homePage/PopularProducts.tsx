@@ -18,14 +18,19 @@ import { retrievePopularProducts } from "./selector";
 import { Product } from "../../../lib/types/product";
 import { serverApi } from "../../../lib/config";
 
+interface PopularProductsProps {
+  chooseProductHandler: (id: string) => void;
+}
+
 /** REDUX SLICE & SELECTOR **/
 const popularProductsRetriever = createSelector(
   retrievePopularProducts,
   (popularProducts) => ({ popularProducts }),
 );
 
-export default function PopularProducts() {
+export default function PopularProducts(props: PopularProductsProps) {
   const { popularProducts } = useSelector(popularProductsRetriever);
+  const { chooseProductHandler } = props;
 
   return (
     <div className="popular-products-frame">
@@ -44,7 +49,10 @@ export default function PopularProducts() {
                 const imagePath = `${serverApi}/${product.productImages[0]}`;
                 return (
                   <Grid item key={product._id} xs={12} sm={6} md={3}>
-                    <Card className={"card"}>
+                    <Card
+                      className={"card"}
+                      onClick={() => chooseProductHandler(product._id)}
+                    >
                       {/* 1. Clear Image Area */}
                       <CardMedia
                         component="img"
